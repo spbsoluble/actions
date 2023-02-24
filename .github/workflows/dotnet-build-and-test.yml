@@ -81,8 +81,8 @@ jobs:
         run: |
           $newVer = "${{ inputs.release_version || '1.0.0' }}".TrimStart('v').Split('-')[0]
           MSBuild.exe $Env:SOLUTION_PATH -p:RestorePackagesConfig=false -p:Configuration=Debug -p:Version=$newVer
-      
-      - name: Run test console
+
+      - name: Run Add test console
         run: |
           cd "${{ inputs.test_working_dir }}"
           echo "Running test console hard-coded to Debug/netcoreapp3.1"
@@ -91,3 +91,35 @@ jobs:
           $testConsolePath = (Get-ChildItem -Include bin/Debug/*TestConsole.exe -File -Recurse).fullname
           echo "Test Console Path: ${testConsolePath}"
           $testConsolePath
+        env:
+          TEST_MANUAL: false
+          TEST_CERT_MGMT_TYPE: add
+          TEST_ORCH_OPERATION: man
+
+      - name: Run Inventory test console
+        run: |
+          cd "${{ inputs.test_working_dir }}"
+          echo "Running test console hard-coded to Debug/netcoreapp3.1"
+          bin\Debug\netcoreapp3.1\TestConsole.exe
+          echo "Running *TestConsole.exe in Debug folder"
+          $testConsolePath = (Get-ChildItem -Include bin/Debug/*TestConsole.exe -File -Recurse).fullname
+          echo "Test Console Path: ${testConsolePath}"
+          $testConsolePath
+        env:
+          TEST_MANUAL: false
+          TEST_CERT_MGMT_TYPE: inv
+          TEST_ORCH_OPERATION: inv
+
+      - name: Run Remove test console
+        run: |
+          cd "${{ inputs.test_working_dir }}"
+          echo "Running test console hard-coded to Debug/netcoreapp3.1"
+          bin\Debug\netcoreapp3.1\TestConsole.exe
+          echo "Running *TestConsole.exe in Debug folder"
+          $testConsolePath = (Get-ChildItem -Include bin/Debug/*TestConsole.exe -File -Recurse).fullname
+          echo "Test Console Path: ${testConsolePath}"
+          $testConsolePath
+        env:
+          TEST_MANUAL: false
+          TEST_CERT_MGMT_TYPE: rem
+          TEST_ORCH_OPERATION: man
