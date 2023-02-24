@@ -23,10 +23,29 @@ on:
         description: The relative path to the test solution file
         required: true
         type: string
+      KEYFACTOR_HOSTNAME:
+        description: 'The hostname of the Keyfactor Command server.'
+        required: true
+      KEYFACTOR_DOMAIN:
+        description: 'The AD domain of the Keyfactor Command server.'
+        required: true
     secrets:
       token:
         description: 'Secret token from caller workflow to access private packages'
         required: true
+      KEYFACTOR_PASSWORD:
+        description: 'The password of the Keyfactor user.'
+        required: true
+      KEYFACTOR_USERNAME:
+        description: 'The username of the Keyfactor user.'
+        required: true
+      TEST_PAM_MOCK_USERNAME:
+        description: 'The username of the orchestrated system to connect to.'
+        required: true
+      TEST_PAM_MOCK_PASSWORD:
+        description: 'The password to the orchestrated systems username.'
+        required: true
+
 
 
 jobs:
