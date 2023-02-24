@@ -1,4 +1,9 @@
 name: Build dotnet solution and potentially run test console app
+env:
+  KEYFACTOR_HOSTNAME: ${{ env.KEYFACTOR_HOSTNAME }}
+  KEYFACTOR_DOMAIN: ${{ env.KEYFACTOR_DOMAIN }}
+  KEYFACTOR_USERNAME: ${{ env.KEYFACTOR_USERNAME }}
+
 on:
   workflow_call:
     inputs:
