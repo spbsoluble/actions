@@ -1,4 +1,4 @@
-name: Build dotnet solution and potentially upload the release
+name: Build dotnet solution and potentially run test console app
 on:
   workflow_call:
     inputs:
@@ -30,7 +30,7 @@ on:
 
 
 jobs:
-  dotnet-build-and-release:
+  dotnet-build-and-test:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
