@@ -15,6 +15,14 @@ on:
         description: The relative directory inside the repo where the build artifacts to publish for release will be located
         required: false # leave empty for non-release build
         type: string
+      test_working_dir:
+        description: The relative directory inside the repo where the test artifacts will be located
+        required: true
+        type: string
+      test_sln_path:
+        description: The relative path to the test solution file
+        required: true
+        type: string
     secrets:
       token:
         description: 'Secret token from caller workflow to access private packages'
@@ -76,6 +84,7 @@ jobs:
       
       - name: Run test console
         run: |
+          cd "${{ inputs.test_working_dir }}"
           $testConsolePath = (Get-ChildItem -Include *TestConsole.exe -File -Recurse).fullname
           echo "Test Console Path: ${testConsolePath}"
           $testConsolePath
